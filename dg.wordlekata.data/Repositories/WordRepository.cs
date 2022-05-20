@@ -25,12 +25,7 @@ public class WordRepository : IWordRepository
 
     public void SetWordAsUsed(string word)
     {
-        if (!File.Exists(UsedWordPath))
-            File.Create(UsedWordPath);
-        
-        using var fileStream = File.OpenWrite(UsedWordPath);
-        using var streamWriter = new StreamWriter(fileStream);
-        
-        streamWriter.WriteLine(word);
+        using var sw = new StreamWriter(UsedWordPath, true);
+        sw.WriteLine(word);
     }
 }
