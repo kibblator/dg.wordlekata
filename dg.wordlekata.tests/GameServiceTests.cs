@@ -17,7 +17,8 @@ public class WordSelectionServiceTests
         var gameService = new GameService(wordServiceMock.Object);
 
         //Act
-        var gameState = gameService.NewGame();
+        gameService.NewGame();
+        var gameState = gameService.GameState;
 
         //Assert
         wordServiceMock.Verify(ws => ws.GetWord(), Times.Once);
