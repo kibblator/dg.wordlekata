@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using dg.wordlekata.console.Helpers;
 using dg.wordlekata.data.Installers;
 using dg.wordlekata.Installers;
@@ -10,7 +11,7 @@ namespace dg.wordlekata.console;
 public static class Program
 {
     private static GameService _gameService;
-    private const int StartingLine = 4;
+    private const int StartingLine = 5;
     private static void Main()
     {
         var serviceProvider = RegisterServices();
@@ -19,6 +20,7 @@ public static class Program
             serviceProvider.GetRequiredService<IGuessService>());
         _gameService.NewGame();
 
+        Console.WriteLine();
         Console.WriteLine("Game started!");
         Console.WriteLine("Press the Escape (Esc) key to quit: \n");
         Console.WriteLine($"Chosen word was {_gameService.GameState.ChosenWord}");
@@ -45,13 +47,33 @@ public static class Program
     
     private static void GuessSubmitted(string guessWord)
     {
-        _gameService.Guess(guessWord);
-
-        for(var i = 0; i < _gameService.GameState.Guesses.Count; i++)
+        if (guessWord.Length != _gameService.GameState.ChosenWord.Length)
         {
-            Console.SetCursorPosition(0, StartingLine + i);
-            ConsoleHelpers.ClearCurrentConsoleLine();
-            Console.WriteLine(_gameService.GameState.Guesses[i]);
+            GetUserToGuessAgain();
         }
+        else
+        {
+            _gameService.Guess(guessWord);
+
+            for(var i = 0; i < _gameService.GameState.Guesses.Count; i++)
+            {
+                Console.SetCursorPosition(0, StartingLine + i);
+                ConsoleHelpers.ClearCurrentConsoleLine();
+                ConsoleHelpers.WriteGuessWord(_gameService.GameState.Guesses[i]);
+            }
+        }
+    }
+
+    private static void GetUserToGuessAgain()
+    {
+        var cursorTop = Console.GetCursorPosition().Top;
+        Console.SetCursorPosition(0, Console.WindowTop);
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("Word length incorrect, please guess again");
+        Thread.Sleep(1000);
+        ConsoleHelpers.ClearCurrentConsoleLine();
+        Console.ResetColor();
+        Console.SetCursorPosition(0, cursorTop);
+        ConsoleHelpers.ClearCurrentConsoleLine();
     }
 }

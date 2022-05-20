@@ -8,5 +8,6 @@ public static class ServiceInstaller
     public static void Install(IServiceCollection services)
     {
         services.AddSingleton<IWordService, WordService>();
+        services.AddSingleton<IGuessService, GuessService>();
     }
 }
