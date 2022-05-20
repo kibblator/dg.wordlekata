@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dg.wordlekata", "dg.wordlekata\dg.wordlekata.csproj", "{45EE558A-63D2-44E2-A2E8-ADE7F7017D11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dg.wordlekata.tests", "dg.wordlekata.tests\dg.wordlekata.tests.csproj", "{5C5E637F-571A-4A3D-A708-CC8834B54A48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dg.wordlekata.console", "dg.wordlekata.console\dg.wordlekata.console.csproj", "{CCD71E4E-F1D8-4C2A-8B52-7206BD374EF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dg.wordlekata.data", "dg.wordlekata.data\dg.wordlekata.data.csproj", "{09DA9238-8C92-41DB-86BB-8C4A79185397}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45EE558A-63D2-44E2-A2E8-ADE7F7017D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45EE558A-63D2-44E2-A2E8-ADE7F7017D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45EE558A-63D2-44E2-A2E8-ADE7F7017D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45EE558A-63D2-44E2-A2E8-ADE7F7017D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C5E637F-571A-4A3D-A708-CC8834B54A48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C5E637F-571A-4A3D-A708-CC8834B54A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C5E637F-571A-4A3D-A708-CC8834B54A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C5E637F-571A-4A3D-A708-CC8834B54A48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCD71E4E-F1D8-4C2A-8B52-7206BD374EF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCD71E4E-F1D8-4C2A-8B52-7206BD374EF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCD71E4E-F1D8-4C2A-8B52-7206BD374EF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCD71E4E-F1D8-4C2A-8B52-7206BD374EF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09DA9238-8C92-41DB-86BB-8C4A79185397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09DA9238-8C92-41DB-86BB-8C4A79185397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09DA9238-8C92-41DB-86BB-8C4A79185397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09DA9238-8C92-41DB-86BB-8C4A79185397}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
