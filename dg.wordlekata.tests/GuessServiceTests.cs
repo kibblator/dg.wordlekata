@@ -22,10 +22,10 @@ public class GuessServiceTests
         const string guessedWord = "yxxdx";
         
         //Act
-        var guessResult = _guessService.SubmitGuess(selectedWord, guessedWord);
+        var guess = _guessService.SubmitGuess(selectedWord, guessedWord);
         
         //Assert
-        Assert.Equal(2, guessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Grey));
+        Assert.Equal(2, guess.GuessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Grey));
     }
 
     [Fact]
@@ -36,10 +36,10 @@ public class GuessServiceTests
         const string guessedWord = "burnt";
         
         //Act
-        var guessResult = _guessService.SubmitGuess(selectedWord, guessedWord);
+        var guess = _guessService.SubmitGuess(selectedWord, guessedWord);
         
         //Assert
-        Assert.Equal(1, guessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Green));
+        Assert.Equal(1, guess.GuessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Green));
     }
 
     [Fact]
@@ -50,10 +50,10 @@ public class GuessServiceTests
         const string guessedWord = "ydddd";
         
         //Act
-        var guessResult = _guessService.SubmitGuess(selectedWord, guessedWord);
+        var guess = _guessService.SubmitGuess(selectedWord, guessedWord);
         
         //Assert
-        Assert.Equal(1, guessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Yellow));
+        Assert.Equal(1, guess.GuessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Yellow));
     }
 
     [Fact]
@@ -64,12 +64,12 @@ public class GuessServiceTests
         const string guessedWord = "baecd";
         
         //Act
-        var guessResult = _guessService.SubmitGuess(selectedWord, guessedWord);
+        var guess = _guessService.SubmitGuess(selectedWord, guessedWord);
         
         //Assert
-        Assert.Equal(5, guessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Yellow));
-        Assert.Equal(0, guessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Grey));
-        Assert.Equal(0, guessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Green));
+        Assert.Equal(5, guess.GuessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Yellow));
+        Assert.Equal(0, guess.GuessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Grey));
+        Assert.Equal(0, guess.GuessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Green));
     }
     
     [Fact]
@@ -80,12 +80,12 @@ public class GuessServiceTests
         const string guessedWord = "cpcpx";
         
         //Act
-        var guessResult = _guessService.SubmitGuess(selectedWord, guessedWord);
+        var guess = _guessService.SubmitGuess(selectedWord, guessedWord);
         
         //Assert
-        Assert.Equal(1, guessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Yellow));
-        Assert.Equal(1, guessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Green));
-        Assert.Equal(3, guessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Grey));
+        Assert.Equal(1, guess.GuessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Yellow));
+        Assert.Equal(1, guess.GuessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Green));
+        Assert.Equal(3, guess.GuessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Grey));
     }
     
     [Fact]
@@ -96,10 +96,10 @@ public class GuessServiceTests
         const string guessedWord = "cpcpx";
         
         //Act
-        var guessResult = _guessService.SubmitGuess(selectedWord, guessedWord);
+        var guess = _guessService.SubmitGuess(selectedWord, guessedWord);
         
         //Assert
-        Assert.Equal(2, guessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Yellow));
-        Assert.Equal(1, guessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Green));
+        Assert.Equal(2, guess.GuessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Yellow));
+        Assert.Equal(1, guess.GuessResult.Count(gr => gr.LetterMatchType == LetterMatchType.Green));
     }
 }

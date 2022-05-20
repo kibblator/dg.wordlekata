@@ -6,11 +6,11 @@ public class GameState
 {
     public GameState()
     {
-        Guesses = new List<string>();
+        Guesses = new List<Guess>();
     }
     
     public string ChosenWord { get; set; }
-    public List<string> Guesses { get; }
+    public List<Guess> Guesses { get; }
     public GameStatus Status { get; set; }
 
     public void Clear()

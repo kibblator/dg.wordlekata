@@ -5,11 +5,12 @@ namespace dg.wordlekata.Services;
 
 public interface IGuessService
 {
+    Guess SubmitGuess(string selectedWord, string guessedWord);
 }
 
 public class GuessService : IGuessService
 {
-    public IList<GuessResult> SubmitGuess(string selectedWord, string guessedWord)
+    public Guess SubmitGuess(string selectedWord, string guessedWord)
     {
         var guessResult = new List<GuessResult>();
         var letterCounts = GetLetterCounts(selectedWord);
@@ -43,7 +44,10 @@ public class GuessService : IGuessService
             guessResult.Add(result);
         }
 
-        return guessResult;
+        return new Guess
+        {
+            GuessResult = guessResult
+        };
     }
 
     private static Dictionary<char, int> GetLetterCounts(string selectedWord)

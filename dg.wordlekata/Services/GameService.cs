@@ -5,13 +5,15 @@ namespace dg.wordlekata.Services;
 public class GameService
 {
     private readonly IWordService _wordService;
+    private readonly IGuessService _guessService;
     private const int GuessLimit = 5;
 
     public GameState GameState { get; }
 
-    public GameService(IWordService wordService)
+    public GameService(IWordService wordService, IGuessService guessService)
     {
         _wordService = wordService;
+        _guessService = guessService;
         GameState = new GameState();
     }
 
@@ -24,7 +26,8 @@ public class GameService
 
     public void Guess(string guessedWord)
     {
-        GameState.Guesses.Add(guessedWord);
+        var guess = _guessService.SubmitGuess(GameState.ChosenWord, guessedWord);
+        GameState.Guesses.Add(guess);
         CheckWon(guessedWord);
     }
 

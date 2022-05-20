@@ -15,7 +15,8 @@ public static class Program
     {
         var serviceProvider = RegisterServices();
 
-        _gameService = new GameService(serviceProvider.GetRequiredService<IWordService>());
+        _gameService = new GameService(serviceProvider.GetRequiredService<IWordService>(),
+            serviceProvider.GetRequiredService<IGuessService>());
         _gameService.NewGame();
 
         Console.WriteLine("Game started!");

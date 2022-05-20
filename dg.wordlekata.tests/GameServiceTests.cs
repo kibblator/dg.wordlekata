@@ -7,24 +7,31 @@ namespace dg.wordlekata.tests;
 
 public class WordSelectionServiceTests
 {
+    private readonly Mock<IWordService> _wordServiceMock;
+    private readonly Mock<IGuessService> _guessServiceMock;
+    private const string ChosenWord = "slide";
+    public WordSelectionServiceTests()
+    {
+        _wordServiceMock = new Mock<IWordService>();
+        _wordServiceMock.Setup(ws => ws.GetWord()).Returns(ChosenWord);
+        
+        _guessServiceMock = new Mock<IGuessService>();
+    }
+    
     [Fact]
     public void WhenGameStarts_WordIsPicked()
     {
         //Arrange
-        var wordServiceMock = new Mock<IWordService>();
-        const string chosenWord = "slide";
-        wordServiceMock.Setup(ws => ws.GetWord()).Returns(chosenWord);
-        
-        var gameService = new GameService(wordServiceMock.Object);
+        var gameService = new GameService(_wordServiceMock.Object, _guessServiceMock.Object);
 
         //Act
         gameService.NewGame();
         var gameState = gameService.GameState;
 
         //Assert
-        wordServiceMock.Verify(ws => ws.GetWord(), Times.Once);
+        _wordServiceMock.Verify(ws => ws.GetWord(), Times.Once);
         Assert.False(string.IsNullOrEmpty(gameState.ChosenWord));
-        Assert.Equal(chosenWord, gameState.ChosenWord);
+        Assert.Equal(ChosenWord, gameState.ChosenWord);
     }
     
     [Fact]
@@ -35,7 +42,7 @@ public class WordSelectionServiceTests
         const string chosenWord = "slide";
         wordServiceMock.Setup(ws => ws.GetWord()).Returns(chosenWord);
         
-        var gameService = new GameService(wordServiceMock.Object);
+        var gameService = new GameService(_wordServiceMock.Object, _guessServiceMock.Object);
         var gameState = gameService.GameState;
 
         //Act
@@ -59,7 +66,7 @@ public class WordSelectionServiceTests
         const string chosenWord = "slide";
         wordServiceMock.Setup(ws => ws.GetWord()).Returns(chosenWord);
         
-        var gameService = new GameService(wordServiceMock.Object);
+        var gameService = new GameService(_wordServiceMock.Object, _guessServiceMock.Object);
         var gameState = gameService.GameState;
 
         //Act
