@@ -5,25 +5,36 @@ namespace dg.wordlekata.Services;
 public class GameService
 {
     private readonly IWordService _wordService;
-    private readonly GameState _gameState;
-    
-    public GameState GameState => _gameState;
+    private const int GuessLimit = 5;
+
+    public GameState GameState { get; }
 
     public GameService(IWordService wordService)
     {
         _wordService = wordService;
-        _gameState = new GameState();
+        GameState = new GameState();
     }
 
     public void NewGame()
     {
-        _gameState.Clear();
+        GameState.Clear();
         var chosenWord = _wordService.GetWord();
-        _gameState.ChosenWord = chosenWord;
+        GameState.ChosenWord = chosenWord;
     }
 
     public void Guess(string guessedWord)
     {
-        _gameState.Guesses.Add(guessedWord);
+        GameState.Guesses.Add(guessedWord);
+        CheckWon(guessedWord);
+    }
+
+    private void CheckWon(string guessedWord)
+    {
+        if (guessedWord == GameState.ChosenWord)
+            GameState.Status = GameStatus.Won;
+        else if (GameState.Guesses.Count >= GuessLimit)
+        {
+            GameState.Status = GameStatus.Lost;
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace dg.wordlekata.console;
 public static class Program
 {
     private static GameService _gameService;
+    private const int StartingLine = 4;
     private static void Main()
     {
         var serviceProvider = RegisterServices();
@@ -18,7 +19,6 @@ public static class Program
         _gameService.NewGame();
 
         Console.WriteLine("Game started!");
-
         Console.WriteLine("Press the Escape (Esc) key to quit: \n");
         Console.WriteLine($"Chosen word was {_gameService.GameState.ChosenWord}");
 
@@ -27,7 +27,6 @@ public static class Program
             while (!Console.KeyAvailable)
             {
                 var guess = ConsoleHelpers.ReadLineWithCancel();
-                Console.WriteLine();
                 GuessSubmitted(guess);
             }
         } while (Console.ReadKey(true).Key != ConsoleKey.Escape);
@@ -46,11 +45,12 @@ public static class Program
     private static void GuessSubmitted(string guessWord)
     {
         _gameService.Guess(guessWord);
-        Console.WriteLine($"You guessed '{guessWord}'");
-        Console.WriteLine("Guesses so far are:");
-        _gameService.GameState.Guesses.ForEach(g =>
+
+        for(var i = 0; i < _gameService.GameState.Guesses.Count; i++)
         {
-            Console.WriteLine(g);
-        });
+            Console.SetCursorPosition(0, StartingLine + i);
+            ConsoleHelpers.ClearCurrentConsoleLine();
+            Console.WriteLine(_gameService.GameState.Guesses[i]);
+        }
     }
 }

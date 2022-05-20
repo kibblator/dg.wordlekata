@@ -1,4 +1,5 @@
-﻿using dg.wordlekata.Services;
+﻿using dg.wordlekata.Models;
+using dg.wordlekata.Services;
 using Moq;
 using Xunit;
 
@@ -22,8 +23,51 @@ public class WordSelectionServiceTests
 
         //Assert
         wordServiceMock.Verify(ws => ws.GetWord(), Times.Once);
-        Assert.NotNull(gameState);
         Assert.False(string.IsNullOrEmpty(gameState.ChosenWord));
         Assert.Equal(chosenWord, gameState.ChosenWord);
+    }
+    
+    [Fact]
+    public void GameService_GuessLimitReached_GameOver()
+    {
+        //Arrange
+        var wordServiceMock = new Mock<IWordService>();
+        const string chosenWord = "slide";
+        wordServiceMock.Setup(ws => ws.GetWord()).Returns(chosenWord);
+        
+        var gameService = new GameService(wordServiceMock.Object);
+        var gameState = gameService.GameState;
+
+        //Act
+        gameService.NewGame();
+        gameService.Guess("wrong");
+        gameService.Guess("wrong");
+        gameService.Guess("wrong");
+        gameService.Guess("wrong");
+        gameService.Guess("wrong");
+
+        //Assert
+        Assert.False(string.IsNullOrEmpty(gameState.ChosenWord));
+        Assert.Equal(GameStatus.Lost, gameState.Status);
+    }
+    
+    [Fact]
+    public void GameService_GuessedCorrectly_GameWon()
+    {
+        //Arrange
+        var wordServiceMock = new Mock<IWordService>();
+        const string chosenWord = "slide";
+        wordServiceMock.Setup(ws => ws.GetWord()).Returns(chosenWord);
+        
+        var gameService = new GameService(wordServiceMock.Object);
+        var gameState = gameService.GameState;
+
+        //Act
+        gameService.NewGame();
+        gameService.Guess("slide");
+
+        //Assert
+        Assert.False(string.IsNullOrEmpty(gameState.ChosenWord));
+        Assert.Equal(GameStatus.Won, gameState.Status);
     }
 }
